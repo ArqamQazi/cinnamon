@@ -142,7 +142,12 @@ ClassicSwitcher.prototype = {
         
         this.actor.opacity = 255;
         this._initialDelayTimeoutId = 0;
-        this._next();
+
+        let name = this._binding ? this._binding.get_name() : '';
+        if (name.includes('backward'))
+            this._previous();
+        else
+            this._next();
     },
     
     _hide: function() {
