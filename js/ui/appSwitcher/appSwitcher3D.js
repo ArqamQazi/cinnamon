@@ -55,7 +55,7 @@ AppSwitcher3D.prototype = {
 
     _show: function() {
         this._enableMonitorFix();
-        
+        let [x, y, modifiers] = global.get_pointer();       
         let monitor = this._activeMonitor;
         this.actor.set_position(monitor.x, monitor.y);
         this.actor.set_size(monitor.width, monitor.height);
@@ -78,7 +78,10 @@ AppSwitcher3D.prototype = {
 
         this._initialDelayTimeoutId = 0;
 
-        this._next();
+        if (modifiers & Clutter.ModifierType.SHIFT_MASK)
+            this._previous();
+        else
+            this._next();
     },
     
     _hidePreviews: function(endOpacity) {
